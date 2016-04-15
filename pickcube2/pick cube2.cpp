@@ -533,7 +533,7 @@ int main(void)
 			glm::vec3 ray_origin;
 			glm::vec3 ray_direction;
 			ScreenPosToWorldRay(
-				xpos, ypos,
+				xpos, 768-ypos,
 				1024, 768,
 				View,
 				Projection,
@@ -546,8 +546,8 @@ int main(void)
 
 			//ºÏ≤‚√Ê
 			float intersection_distance; // Output of TestRayOBBIntersection()
-			glm::vec3 aabb_min(-1.0f, -1.0f, -1.0f);
-			glm::vec3 aabb_max(1.0f, 1.0f, 1.0f);
+			glm::vec3 aabb_min(-2.0f, -2.0f, -2.0f);
+			glm::vec3 aabb_max(2.0f, 2.0f, 2.0f);
 
 			message = "no cube";
 
