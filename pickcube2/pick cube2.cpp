@@ -31,11 +31,11 @@ std::string message;
 
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path){
 
-	// ´´Ôì×ÅÉ«Æ÷
+	// åˆ›é€ ç€è‰²å™¨
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-	// ´ÓÖ¸¶¨ÎÄ¼şÀïÃæ¶ÁÈ¡¶¥µã×ÅÉ«Æ÷µÄÄÚÈİ
+	// ä»æŒ‡å®šæ–‡ä»¶é‡Œé¢è¯»å–é¡¶ç‚¹ç€è‰²å™¨çš„å†…å®¹
 	std::string VertexShaderCode;
 	std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
 	if (VertexShaderStream.is_open()){
@@ -98,7 +98,7 @@ GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_pat
 
 
 
-	// Á´½Ó³ÌĞò
+	// é“¾æ¥ç¨‹åº
 	printf("Linking program\n");
 	GLuint ProgramID = glCreateProgram();
 	glAttachShader(ProgramID, VertexShaderID);
@@ -135,7 +135,7 @@ void ScreenPosToWorldRay(
 	){
 
 	// The ray Start and End positions, in Normalized Device Coordinates (Have you read Tutorial 4 ?)
-	//¹âÏßÆğµãºÍÖÕµãÈ·¶¨£¬¸ù¾İÕâÁ½¸öµãÈ¥È·¶¨¹âÏßµÄ·½Ïò
+	//å…‰çº¿èµ·ç‚¹å’Œç»ˆç‚¹ç¡®å®šï¼Œæ ¹æ®è¿™ä¸¤ä¸ªç‚¹å»ç¡®å®šå…‰çº¿çš„æ–¹å‘
 	glm::vec4 lRayStart_NDC(
 		((float)mouseX / (float)screenWidth - 0.5f) * 2.0f, // [0,1024] -> [-1,1]
 		((float)mouseY / (float)screenHeight - 0.5f) * 2.0f, // [0, 768] -> [-1,1]
@@ -313,7 +313,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
-	// ´´½¨´°¿Ú
+	// åˆ›å»ºçª—å£
 	window = glfwCreateWindow(1024, 768, "Tutorial 04 - Colored Cube", NULL, NULL);
 	if (window == NULL){
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -335,14 +335,14 @@ int main(void)
 
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	// À¶É«±³¾°
+	// è“è‰²èƒŒæ™¯
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	//»ìºÏ
+	//æ··åˆ
 	glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-	//Éî¶È»º´æ
+	//æ·±åº¦ç¼“å­˜
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
@@ -394,7 +394,7 @@ int main(void)
 		1.0f, 1.0f, 2.0f,
 		-1.0f, 1.0f, 2.0f,
 		1.0f, -1.0f, 2.0f
-		//---------------------------------------------------------------------------------//ÎÒÖ»ÊÇ»ªÀöµÄ·Ö¸îÏß
+		//---------------------------------------------------------------------------------//æˆ‘åªæ˜¯åä¸½çš„åˆ†å‰²çº¿
 
 	};
 
@@ -454,7 +454,7 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 	do{
-		// Çå³şÆÁÄ»
+		// æ¸…æ¥šå±å¹•
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 		// Camera matrix
@@ -465,7 +465,7 @@ int main(void)
 			);
 
 
-		// ÓÃ×ÅÉ«Æ÷
+		// ç”¨ç€è‰²å™¨
 
 		glm::vec3 cubePositions[2] = {
 			glm::vec3(0.0f, 0.0f, 1.0f),
@@ -477,7 +477,7 @@ int main(void)
 			glUseProgram(programID);
 			glEnableVertexAttribArray(0);
 			glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-			//ÉèÖÃ¶¥µãÊôĞÔÖ¸Õë
+			//è®¾ç½®é¡¶ç‚¹å±æ€§æŒ‡é’ˆ
 			glVertexAttribPointer(
 				0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 				3,                  // size
@@ -544,10 +544,10 @@ int main(void)
 
 
 
-			//¼ì²âÃæ
+			//æ£€æµ‹é¢
 			float intersection_distance; // Output of TestRayOBBIntersection()
-			glm::vec3 aabb_min(-2.0f, -2.0f, -2.0f);
-			glm::vec3 aabb_max(2.0f, 2.0f, 2.0f);
+			glm::vec3 aabb_min(-1.0f, -1.0f, -0.0f);
+			glm::vec3 aabb_max(1.0f, 1.0f, 2.0f);//è¿™ä¸ªå°±æ˜¯åŒ…å›´ç›’çš„åæ ‡çš„ï¼Œè·Ÿä¸Šé¢çš„é¡¶ç‚¹åæ ‡ç›¸å¯¹åº”ã€‚
 
 			message = "no cube";
 
@@ -585,7 +585,7 @@ int main(void)
 
 
 
-		// »­12¸öÈı½ÇĞÎ
+		// ç”»12ä¸ªä¸‰è§’å½¢
 
 
 		glfwSwapBuffers(window);
