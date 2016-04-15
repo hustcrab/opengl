@@ -468,7 +468,7 @@ int main(void)
 			double xpos, ypos;
 			glfwGetCursorPos(window, &xpos, &ypos);
 
-			glReadPixels(xpos, ypos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glReadPixels(xpos,768-ypos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			int a = data[0];
 			int b = data[1];
 
